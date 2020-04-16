@@ -5,8 +5,8 @@ if [ "$USER" = "root" ]; then
     mkdir /home/temp
     cd /home/temp
     wget https://raw.githubusercontent.com/Poli-Systems/quick/master/install.sh
-    chmod +x InstallAll.sh
-    screen ./InstallAll.sh
+    chmod +x install.sh
+    screen ./install.sh
     cd ..
     rm -r /home/temp
 else
