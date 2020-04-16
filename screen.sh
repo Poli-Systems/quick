@@ -4,9 +4,8 @@ if [ "$USER" = "root" ]; then
     apt install screen -y
     mkdir /home/temp
     cd /home/temp
-    wget https://raw.githubusercontent.com/Poli-Systems/quick/master/install.sh
-    chmod +x install.sh
-    screen ./install.sh
+    wget --no-cache https://raw.githubusercontent.com/Poli-Systems/quick/master/install.sh
+    screen bash install.sh
     cd ..
     rm -r /home/temp
 else
