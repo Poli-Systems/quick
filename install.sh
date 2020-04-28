@@ -3,7 +3,6 @@
 echo "We do not recommand to run this script without knowing what it does. Strating now...."
 
 #Updating, apply more time to keep alive ssh client and add the user root to the sudores
-    apt update -y
     apt install git openssh-server -y
     LINE='ClientAliveInterval 120'
     FILE="/etc/ssh/sshd_config"
