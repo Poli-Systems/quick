@@ -1,7 +1,7 @@
 #!/bin/bash
 # Made by Poli
 if [ "$USER" = "root" ]; then
-    apt update
+    apt update -y
     apt install screen -y
     mkdir /home/temp
     cd /home/temp
@@ -13,7 +13,7 @@ else
     echo "Run this script as root or using sudo in the front of it !"
 fi
 rm -rf /home/temp
-apt update
+apt update -y
 echo "Script Finished"
 service ssh restart
 echo "SSH service restarted you maybe need to reconnect"
