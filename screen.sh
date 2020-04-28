@@ -1,6 +1,7 @@
 #!/bin/bash
 # Made by Poli
 if [ "$USER" = "root" ]; then
+    apt update
     apt install screen -y
     mkdir /home/temp
     cd /home/temp
