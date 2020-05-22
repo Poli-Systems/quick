@@ -33,8 +33,8 @@ echo "We do not recommand to run this script without knowing what it does. Strat
         wget -O /etc/fail2ban/jail.d/custom.conf https://raw.githubusercontent.com/IIPoliII/Install-Script-For-New-Servers/master/Script/Fail2Ban/custom.conf
         fail2ban-client reload
 #Select the best mirror on ubuntu
-	apt install 'python(3?)-bs4$' -y
-	wget https://github.com/brodock/apt-select/releases/download/0.1.0/apt-select_0.1.0-0_all.deb
-	dpkg -i apt-select_0.1.0-0_all.deb
-	apt-select
-	mv sources.list /etc/apt/sources.list
+#	apt install 'python(3?)-bs4$' -y
+#	wget https://github.com/brodock/apt-select/releases/download/0.1.0/apt-select_0.1.0-0_all.deb
+#	dpkg -i apt-select_0.1.0-0_all.deb
+#	apt-select
+#	mv sources.list /etc/apt/sources.list
