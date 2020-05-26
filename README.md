@@ -1,4 +1,6 @@
 # quick
+Ubuntu 18, Debian only.
+
 A quick installer that install a few things needed on our machines
 
 To use the Script use :
