@@ -17,3 +17,4 @@ apt update -y
 echo "Script Finished"
 service ssh restart
 echo "SSH service restarted we recommand you to reconnect to avoid issues with backspace."
+echo "Thanks for using this script, by Poli Systems"
