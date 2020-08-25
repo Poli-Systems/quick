@@ -18,7 +18,7 @@ echo "We do not recommand to run this script without knowing what it does. Strat
 	add-apt-repository universe
 
 #Installing a few packages
-	apt install -y openssh-server mysql-client smartmontools wget curl nano zip unzip sed file libncurses5-dev libncursesw5-dev libssl-dev libpam0g-dev zlib1g-dev dh-autoreconf software-properties-common proftpd screen php htop build-essential make cmake scons gcc g++ pkg-config curl autoconf autogen automake ipset kmod procps traceroute
+	apt install -y openssh-server mysql-client smartmontools wget curl nano zip unzip sed file libncurses5-dev libncursesw5-dev libssl-dev libpam0g-dev zlib1g-dev dh-autoreconf software-properties-common proftpd screen php htop build-essential make cmake scons gcc g++ pkg-config curl autoconf autogen automake ipset kmod procps traceroute firehol firehol-tools crontab
 
 #Creating  an alias for ll instead of ls -l
         echo "alias ll='ls -l --color=auto'
@@ -67,6 +67,18 @@ echo "We do not recommand to run this script without knowing what it does. Strat
 	else
 		echo "You don't have Ubuntu 18.04 or 20.04 SSH hardening won't be executed"
 	fi
+	
+#Firehol with public ban lists (added in crontab as well)
+	echo "        server all accept" >> /etc/firehol/firehol.conf
+	update-ipsets enable feodo palevo sslbl zeus_badips dshield spamhaus_drop spamhaus_edrop openbl blocklist_de bi_ssh-ddos_0_1d bi_ssh-ddos_2_30d bi_ssh_0_1d bi_ssh_1_7d bi_ssh_2_30d bi_sshd_0_1d bi_wordpress_0_1d bi_wordpress_1_7d bi_wordpress_2_30d firehol_level1 firehol_level2 firehol_level3 dshield_top_1000 bruteforceblocker malc0de ransomware_rw greensnow myip fullbogons
+	update-ipsets -s
+	
+	crontab -l > /tmp/tmpcron
+	echo "*/9 * * * * root update-ipsets -s >/dev/null 2>&1" >> /tmp/tmpcron
+	crontab /tmp/tmpcron
+	rm /tmp/tmpcron
+	
+	
 #Select the best mirror on ubuntu
 #	apt install 'python(3?)-bs4$' -y
 #	wget https://github.com/brodock/apt-select/releases/download/0.1.0/apt-select_0.1.0-0_all.deb
