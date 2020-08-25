@@ -18,7 +18,7 @@ echo "We do not recommand to run this script without knowing what it does. Strat
 	add-apt-repository universe
 
 #Installing a few packages
-	apt install -y openssh-server mysql-client smartmontools wget curl nano zip unzip sed file libncurses5-dev libncursesw5-dev libssl-dev libpam0g-dev zlib1g-dev dh-autoreconf software-properties-common proftpd screen php htop build-essential make cmake scons gcc g++ pkg-config curl autoconf autogen automake ipset kmod procps traceroute firehol firehol-tools crontab
+	apt install -y openssh-server mysql-client smartmontools wget curl nano zip unzip sed file libncurses5-dev libncursesw5-dev libssl-dev libpam0g-dev zlib1g-dev dh-autoreconf software-properties-common proftpd screen php htop build-essential make cmake scons gcc g++ pkg-config curl autoconf autogen automake ipset kmod procps traceroute firehol firehol-tools cron
 
 #Creating  an alias for ll instead of ls -l
         echo "alias ll='ls -l --color=auto'
