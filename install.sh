@@ -32,6 +32,41 @@ echo "We do not recommand to run this script without knowing what it does. Strat
         apt install fail2ban -y
         wget -O /etc/fail2ban/jail.d/custom.conf https://raw.githubusercontent.com/IIPoliII/Install-Script-For-New-Servers/master/Script/Fail2Ban/custom.conf
         fail2ban-client reload
+
+#SSH hardening
+	UNTVer=$(lsb_release -ar 2>/dev/null | grep -i release | cut -s -f2)
+
+	if [[ $UNTVer == "20.04" ]]
+	then
+		rm /etc/ssh/ssh_host_*
+
+		ssh-keygen -t rsa -b 4096 -f /etc/ssh/ssh_host_rsa_key -N ""
+
+		ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N ""
+
+		awk '$5 >= 3071' /etc/ssh/moduli > /etc/ssh/moduli.safe
+
+		mv /etc/ssh/moduli.safe /etc/ssh/moduli
+		sed -i 's/^\#HostKey \/etc\/ssh\/ssh_host_\(rsa\|ed25519\)_key$/HostKey \/etc\/ssh\/ssh_host_\1_key/g' /etc/ssh/sshd_config
+		echo -e "\n# Restrict key exchange, cipher, and MAC algorithms, as per sshaudit.com\n# hardening guide.\nKexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group-exchange-sha256\nCiphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr\nMACs hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,umac-128-etm@openssh.com\nHostKeyAlgorithms ssh-ed25519,ssh-ed25519-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com,rsa-sha2-256,rsa-sha2-512,rsa-sha2-256-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com" > /etc/ssh/sshd_config.d/ssh-audit_hardening.conf
+		service ssh restart
+	elif [[ $UNTVer == "18.04" ]]
+	then
+		rm /etc/ssh/ssh_host_*
+
+		ssh-keygen -t rsa -b 4096 -f /etc/ssh/ssh_host_rsa_key -N ""
+
+		ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N ""
+
+		awk '$5 >= 3071' /etc/ssh/moduli > /etc/ssh/moduli.safe
+
+		mv /etc/ssh/moduli.safe /etc/ssh/moduli
+		sed -i 's/^HostKey \/etc\/ssh\/ssh_host_\(dsa\|ecdsa\)_key$/\#HostKey \/etc\/ssh\/ssh_host_\1_key/g' /etc/ssh/sshd_config
+		echo -e "\n# Restrict key exchange, cipher, and MAC algorithms, as per sshaudit.com\n# hardening guide.\nKexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group-exchange-sha256\nCiphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr\nMACs hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,umac-128-etm@openssh.com\nHostKeyAlgorithms ssh-ed25519,ssh-ed25519-cert-v01@openssh.com" >> /etc/ssh/sshd_config
+		service ssh restart
+	else
+		echo "You don't have Ubuntu 18.04 or 20.04 SSH hardening won't be executed"
+	fi
 #Select the best mirror on ubuntu
 #	apt install 'python(3?)-bs4$' -y
 #	wget https://github.com/brodock/apt-select/releases/download/0.1.0/apt-select_0.1.0-0_all.deb
