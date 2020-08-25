@@ -98,7 +98,7 @@ version 6
         done
 
         # individual IPs - ipsets
-        for x in blocklist_de bruteforceblocker malc0de myip greensnow dshield_top_1000
+        for x in blocklist_de bruteforceblocker malc0de myip greensnow dshield_top_1000 blocklist_net_ua botscout_1d botscout_7d botscout_30d botscout cybercrime tor_exits tor_exits_1d tor_exits_7d tor_exits_30d sblam
         do
                 ipset4 create  ${x} hash:ip
                 ipset4 addfile ${x} ipsets/${x}.ipset
@@ -115,7 +115,7 @@ interface any world
         server ipv6neigh accept
 ' > /etc/firehol/firehol.conf
 
-	update-ipsets enable dshield spamhaus_drop spamhaus_edrop blocklist_de firehol_level2 firehol_level3 dshield_top_1000 bruteforceblocker malc0de greensnow myip
+	update-ipsets enable dshield spamhaus_drop blocklist_net_ua botscout_1d spamhaus_edrop blocklist_de firehol_level2 firehol_level3 dshield_top_1000 bruteforceblocker malc0de greensnow myip cybercrime tor_exits sblam
 	update-ipsets -s
 	
 	crontab -l > /tmp/tmpcron
