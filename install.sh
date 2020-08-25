@@ -89,7 +89,7 @@ version 6
         ipset4 add whitelist 127.0.0.1/32
 
         # subnets - netsets
-        for x in fullbogons dshield spamhaus_drop spamhaus_edrop firehol_level1 firehol_level2 firehol_level3 dshield_1d dshield_30d dshield_7d
+        for x in dshield spamhaus_drop spamhaus_edrop firehol_level2 firehol_level3 dshield_1d dshield_30d dshield_7d
         do
                 ipset4 create  ${x} hash:net
                 ipset4 addfile ${x} ipsets/${x}.netset
@@ -111,9 +111,11 @@ version 6
 interface any world
         client all accept
         server all accept
+        client ipv6neigh accept
+        server ipv6neigh accept
 ' > /etc/firehol/firehol.conf
 
-	update-ipsets enable  dshield spamhaus_drop spamhaus_edrop blocklist_de firehol_level1 firehol_level2 firehol_level3 dshield_top_1000 bruteforceblocker malc0de greensnow myip fullbogons
+	update-ipsets enable dshield spamhaus_drop spamhaus_edrop blocklist_de firehol_level2 firehol_level3 dshield_top_1000 bruteforceblocker malc0de greensnow myip
 	update-ipsets -s
 	
 	crontab -l > /tmp/tmpcron
