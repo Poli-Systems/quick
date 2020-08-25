@@ -1,5 +1,5 @@
 # quick
-Ubuntu 18, Debian only.
+Ubuntu 18.04 LTS, Ubuntu 20.04 LTS, Debian only.
 
 A quick installer that install a few things needed on our machines
 
