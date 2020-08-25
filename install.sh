@@ -74,7 +74,7 @@ echo "We do not recommand to run this script without knowing what it does. Strat
 	update-ipsets -s
 	
 	crontab -l > /tmp/tmpcron
-	echo "*/9 * * * * root update-ipsets -s >/dev/null 2>&1" >> /tmp/tmpcron
+	echo "*/13 * * * * root update-ipsets -s >/dev/null 2>&1" >> /tmp/tmpcron
 	crontab /tmp/tmpcron
 	rm /tmp/tmpcron
 	
