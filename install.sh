@@ -78,6 +78,8 @@ echo "We do not recommand to run this script without knowing what it does. Strat
 	crontab /tmp/tmpcron
 	rm /tmp/tmpcron
 	
+	update-rc.d firehol defaults
+	firehol start
 	
 #Select the best mirror on ubuntu
 #	apt install 'python(3?)-bs4$' -y
