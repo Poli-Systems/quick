@@ -98,7 +98,7 @@ version 6
         done
 
         # individual IPs - ipsets
-        for x in blocklist_de bruteforceblocker malc0de myip greensnow dshield_top_1000 blocklist_net_ua botscout_1d botscout_7d botscout_30d botscout cybercrime tor_exits tor_exits_1d tor_exits_7d tor_exits_30d sblam
+        for x in blocklist_de bruteforceblocker malc0de myip greensnow dshield_top_1000 blocklist_net_ua cybercrime tor_exits tor_exits_1d tor_exits_7d tor_exits_30d sblam
         do
                 ipset4 create  ${x} hash:ip
                 ipset4 addfile ${x} ipsets/${x}.ipset
