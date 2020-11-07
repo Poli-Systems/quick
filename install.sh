@@ -103,7 +103,7 @@ version 6
         done
 
         # individual IPs - ipsets
-        for x in blocklist_de bruteforceblocker malc0de myip greensnow dshield_top_1000 blocklist_net_ua cybercrime tor_exits tor_exits_1d tor_exits_7d tor_exits_30d sblam
+        for x in blocklist_de bruteforceblocker greensnow dshield_top_1000 blocklist_net_ua cybercrime tor_exits tor_exits_1d tor_exits_7d tor_exits_30d sblam
         do
                 ipset4 create  ${x} hash:ip
                 ipset4 addfile ${x} ipsets/${x}.ipset
@@ -120,7 +120,7 @@ interface any world
         server ipv6neigh accept
 ' > /etc/firehol/firehol.conf
 
-	update-ipsets enable dshield spamhaus_drop blocklist_net_ua botscout spamhaus_edrop blocklist_de firehol_level2 firehol_level3 dshield_top_1000 bruteforceblocker malc0de greensnow cybercrime tor_exits sblam
+	update-ipsets enable dshield spamhaus_drop blocklist_net_ua botscout spamhaus_edrop blocklist_de firehol_level2 firehol_level3 dshield_top_1000 bruteforceblocker greensnow cybercrime tor_exits sblam
 	update-ipsets -s
 	
 	crontab -l > /tmp/tmpcron
