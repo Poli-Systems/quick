@@ -120,7 +120,7 @@ interface any world
         server ipv6neigh accept
 ' > /etc/firehol/firehol.conf
 
-	update-ipsets enable dshield spamhaus_drop blocklist_net_ua botscout spamhaus_edrop blocklist_de firehol_level2 firehol_level3 dshield_top_1000 bruteforceblocker malc0de greensnow myip cybercrime tor_exits sblam
+	update-ipsets enable dshield spamhaus_drop blocklist_net_ua botscout spamhaus_edrop blocklist_de firehol_level2 firehol_level3 dshield_top_1000 bruteforceblocker malc0de greensnow cybercrime tor_exits sblam
 	update-ipsets -s
 	
 	crontab -l > /tmp/tmpcron
