@@ -123,10 +123,7 @@ interface any world
 	update-ipsets enable dshield spamhaus_drop blocklist_net_ua botscout spamhaus_edrop blocklist_de firehol_level2 firehol_level3 dshield_top_1000 bruteforceblocker greensnow cybercrime tor_exits sblam
 	update-ipsets -s
 	
-	crontab -l > /tmp/tmpcron
-	echo "*/13 * * * * root update-ipsets -s >/dev/null 2>&1" >> /tmp/tmpcron
-	crontab /tmp/tmpcron
-	rm /tmp/tmpcron
+	grep 'root update-ipsets -s' /etc/crontab || echo "*/13 * * * * root update-ipsets -s >/dev/null 2>&1" >> /etc/crontab
   	
 	update-rc.d firehol defaults
 	firehol restart
