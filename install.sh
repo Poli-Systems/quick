@@ -41,7 +41,7 @@ echo "We do not recommand to run this script without knowing what it does. Strat
 #SSH hardening
 	UNTVer=$(lsb_release -ar 2>/dev/null | grep -i release | cut -s -f2)
 
-	if [[ $UNTVer == "20.04" ]]
+	if [[ $UNTVer == "20.04" || $UNTVer == "22.04" ]]
 	then
 		rm /etc/ssh/ssh_host_*
 
